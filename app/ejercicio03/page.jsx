@@ -1,10 +1,9 @@
 'use client'
-import React, { useState } from 'react';
+import React, { useState } from 'react'
 
-const mensaje = document.createElement('p')
 
-mensaje.id="mensaje"
 const Ejercicio03 = () => {
+  const [mensaje, setMensaje] = useState('')
   const [inputValue, setInputValue] = useState(''); // Estado para capturar el valor del cuadro de entrada
 
   const analizar = () => {
@@ -41,34 +40,18 @@ const Ejercicio03 = () => {
             }
               
             if (estado === 1||estado ===2) {
-              console.log("es 1 o 2");
-              mensaje.textContent= "Aceptacion"
-              const ver = document.getElementById('ver')
-              if(ver){
-                ver.appendChild(mensaje)
-              }
-              
-              console.log(p);
+              setMensaje('Aceptado')
             }
             if (estado === 0||estado===3||estado===4||estado===5) {
-              console.log("es 0,3,4 o 5");
-              mensaje.textContent= "No aceptacion"
-              const ver = document.getElementById('ver')
-              if(ver){
-                ver.appendChild(mensaje)
-              }
+              setMensaje('No aceptado')
+
             }
             
             i++;
           }
         }
         else{
-          console.log("Caracter no permitido");
-          mensaje.textContent= "Cadena no permitida"
-          const ver = document.getElementById('ver')
-          if(ver){
-            ver.appendChild(mensaje)
-          }
+          setMensaje('Caracter no valido')
         }
 
       }
@@ -94,7 +77,9 @@ const Ejercicio03 = () => {
       <div className='text-center' style={{fontSize:'20px'}}>
         <button className=' w-40 rounded-sm, text-center' style={{backgroundColor: 'rgba(255, 194, 209,1)'}} onClick={analizar}>Analiza la entrada</button> {/* Llama a la función analizar al hacer clic */}
       </div>
-      <div id='ver' className='text-center' style={{fontSize:'30px'}}></div>
+      <div id='ver' className='text-center' style={{fontSize:'30px'}}>
+        <p>{mensaje}</p>
+      </div>
     </div>
   );
 }

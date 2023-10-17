@@ -1,11 +1,9 @@
 'use client'
 import React, { useState } from 'react';
 
-const mensaje = document.createElement('p')
-
-mensaje.id="mensaje"
 const Ejercicio01 = () => {
-  const [inputValue, setInputValue] = useState(''); // Estado para capturar el valor del cuadro de entrada
+  const [mensaje, setMensaje] = useState('')
+  const [inputValue, setInputValue] = useState('') // Estado para capturar el valor del cuadro de entrada
 
   const analizar = () => {
     class Automata {
@@ -26,28 +24,14 @@ const Ejercicio01 = () => {
           if (/[a-zA-Z]/.test(c[i])) caracter = 0;
           else if (/[0-9]/.test(c[i])) caracter = 1;
           else caracter = 2;
-
           estado = Automata.matriz[estado][caracter];
+          if (estado === 1) {
+            setMensaje('Aceptado')
+          }
+          if (estado === 0) {
+            setMensaje('No aceptado')
+          }
           i++;
-        }
-
-        if (estado === 1) {
-          console.log("es uno");
-          mensaje.textContent= "aceptado"
-          const ver = document.getElementById('ver')
-          if(ver){
-            ver.appendChild(mensaje)
-          }
-          
-          console.log(p);
-        }
-        if (estado === 0) {
-          console.log("es 0");
-          mensaje.textContent= "no aceptado"
-          const ver = document.getElementById('ver')
-          if(ver){
-            ver.appendChild(mensaje)
-          }
         }
       }
     }
@@ -72,7 +56,11 @@ const Ejercicio01 = () => {
       <div className='text-center' style={{fontSize:'20px'}}>
         <button className=' w-40 rounded-sm, text-center' style={{backgroundColor: 'rgba(255, 194, 209,1)'}}  onClick={analizar}>Analiza la entrada</button> 
       </div>
-      <div id='ver' className='text-center' style={{fontSize:'30px'}}></div>
+      <div id='ver' className='text-center' style={{fontSize:'30px'}}>
+        <p>
+          {mensaje}
+        </p>
+      </div>
     </div>
   );
 }

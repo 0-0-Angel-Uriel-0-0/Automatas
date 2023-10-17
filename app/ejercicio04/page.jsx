@@ -1,10 +1,9 @@
 'use client'
 import React, { useState } from 'react';
 
-const mensaje = document.createElement('p')
 
-mensaje.id="mensaje"
 const Ejercicio04 = () => {
+  const [mensaje, setMensaje] = useState('')
   const [inputValue, setInputValue] = useState(''); // Estado para capturar el valor del cuadro de entrada
 
   const analizar = () => {
@@ -41,34 +40,20 @@ const Ejercicio04 = () => {
             }
               
             if (estado === 4) {
-              console.log("es cuatro");
-              mensaje.textContent= "Aceptacion"
-              const ver = document.getElementById('ver')
-              if(ver){
-                ver.appendChild(mensaje)
-              }
-              
-              console.log(p);
+              setMensaje('Aceptado')
             }
-            if (estado === 0||estado===1||estado ===2||estado === 3||estado ===5) {
-              console.log("es 1,2,3 o 5");
-              mensaje.textContent= "No aceptacion"
-              const ver = document.getElementById('ver')
-              if(ver){
-                ver.appendChild(mensaje)
-              }
+            if (estado === 0||estado===1||estado ===2||estado === 3) {
+              setMensaje('No aceptado')
+            }
+            if(estado === 5){
+              setMensaje('Caracter no valido')
             }
             
             i++;
           }
         }
         else{
-          console.log("Caracter no permitido");
-          mensaje.textContent= "Cadena no permitida"
-          const ver = document.getElementById('ver')
-          if(ver){
-            ver.appendChild(mensaje)
-          }
+          setMensaje('Caracter no valido')
         }
 
       }
@@ -94,7 +79,9 @@ const Ejercicio04 = () => {
       <div className='text-center' style={{fontSize:'20px'}}>
         <button className=' w-40 rounded-sm, text-center' style={{backgroundColor: 'rgba(255, 194, 209,1)'}} onClick={analizar}>Analiza la entrada</button> {/* Llama a la función analizar al hacer clic */}
       </div>
-      <div id='ver' className='text-center' style={{fontSize:'30px'}}></div>
+      <div id='ver' className='text-center' style={{fontSize:'30px'}}>
+        <p>{mensaje}</p>
+      </div>
     </div>
   );
 }
